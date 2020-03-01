@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-
+module Api
   class ContactsController < ApplicationController
     def index
       contacts = Contact.order('created_at DESC')
@@ -34,4 +34,4 @@
         params.permit(:FirstName, :LastName, :PhoneNumber, :email)
     end
   end
-
+end
