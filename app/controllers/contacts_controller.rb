@@ -19,7 +19,13 @@
             render json: { status: 'SUCCESS', message: 'Saved Contact', data: contact }, status: :ok
         else 
             render json: { status: 'ERROR', message: 'Contact not saved', data: contact.errors }, status: :unprocessable_entry
-        endadd
+        end
+    end
+
+    def destroy 
+        contact = Contact.find(params[:id])
+        contact.destroy
+        render json: { status: 'SUCCESS', message: 'Contact deleted', data: contact }, status: :ok
     end
 
 
