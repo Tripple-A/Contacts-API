@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Api
+
   class ContactsController < ApplicationController
     def index
       contacts = Contact.order('created_at DESC')
@@ -22,8 +23,7 @@ module Api
       render json: { status: 'SUCCESS', message: 'Loaded Contact', data: contact }, status: :ok
     end
 
-   
-    def update 
+    def update
       contact = Contact.find(params[:id])
 
       if contact.update_attributes(contact_params)
