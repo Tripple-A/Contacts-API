@@ -2,15 +2,9 @@
 
 module Api
   class ContactsController < ApplicationController
-    
     def index
       contacts = Contact.order('created_at DESC')
       render json: { status: 'SUCCESS', message: 'Loaded Contacts', data: contacts }, status: :ok
-    end
-
-    def show
-      contact = Contact.find(params[:id])
-      render json: { status: 'SUCCESS', message: 'Loaded Contact', data: contact }, status: :ok
     end
 
     def create
@@ -20,6 +14,22 @@ module Api
         render json: { status: 'SUCCESS', message: 'Saved Contact', data: contact }, status: :ok
       else
         render json: { status: 'ERROR', message: 'Contact not saved', data: contact.errors }, status: :unprocessable_entry
+      end
+    end
+
+    def show
+      contact = Contact.find(params[:id])
+      render json: { status: 'SUCCESS', message: 'Loaded Contact', data: contact }, status: :ok
+    end
+
+   
+    def update 
+      contact = Contact.find(params[:id])
+
+      if contact.update_attributes(contact_params)
+        render json: { status: 'SUCCESS', message: 'Updated Contact', data: contact }, status: :ok
+      else
+        render json: { status: 'ERROR', message: 'Contact not updated', data: contact.errors }, status: :unprocessable_entry
       end
     end
 
