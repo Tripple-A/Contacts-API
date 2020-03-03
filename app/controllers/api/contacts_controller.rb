@@ -4,8 +4,8 @@ module Api
 
   class ContactsController < ApplicationController
     def index
-      contacts = Contact.order('created_at DESC')
-      render json: { status: 'SUCCESS', message: 'Loaded Contacts', data: contacts }, status: :ok
+      @contacts = Contact.order(:FirstName)
+      render json: { status: 'SUCCESS', message: 'Loaded Contacts', data: @contacts }, status: :ok
     end
 
     def create
